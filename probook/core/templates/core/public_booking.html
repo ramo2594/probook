@@ -1,0 +1,86 @@
+{% extends "base.html" %}
+
+{# Pagina pubblica per creare una prenotazione verso uno specifico professionista #}
+{% block title %}Prenota da {{ professional.business_name }}{% endblock %}
+{% block body_class %}auth-body{% endblock %}
+{% block container_class %}auth-card{% endblock %}
+
+{% block content %}
+    {# Titolo e sottotitolo della pagina di prenotazione #}
+    <h1 class="auth-title">Prenota da {{ professional.business_name }}</h1>
+    <p class="auth-subtitle">Compila il form per fissare un appuntamento.</p>
+
+    {# Form collegato al BookingForm; usa lo stile "auth" (card centrata) #}
+    <form method="post" class="auth-form">
+        {% csrf_token %}
+
+        {# Nome e cognome del cliente #}
+        <div class="auth-field">
+            <label>Nome e cognome</label>
+            {{ form.client_name }}
+            {% if form.client_name.errors %}
+                <p class="field-error">
+                    {{ form.client_name.errors.0 }}
+                </p>
+            {% endif %}
+        </div>
+
+        {# Email di contatto del cliente (usata anche per la conferma) #}
+        <div class="auth-field">
+            <label>Email</label>
+            {{ form.client_email }}
+            {% if form.client_email.errors %}
+                <p class="field-error">
+                    {{ form.client_email.errors.0 }}
+                </p>
+            {% endif %}
+        </div>
+
+        {# Servizio richiesto (es. taglio, taglio+barba, ecc.) #}
+        <div class="auth-field">
+            <label>Servizio</label>
+            {{ form.service }}
+            {% if form.service.errors %}
+                <p class="field-error">
+                    {{ form.service.errors.0 }}
+                </p>
+            {% endif %}
+        </div>
+
+        {# Data dell’appuntamento (validata server-side per non accettare date passate) #}
+        <div class="auth-field">
+            <label>Data</label>
+            {{ form.date }}
+            {% if form.date.errors %}
+                <p class="field-error">
+                    {{ form.date.errors.0 }}
+                </p>
+            {% endif %}
+        </div>
+
+        {# Ora dell’appuntamento #}
+        <div class="auth-field">
+            <label>Ora</label>
+            {{ form.time }}
+            {% if form.time.errors %}
+                <p class="field-error">
+                    {{ form.time.errors.0 }}
+                </p>
+            {% endif %}
+        </div>
+
+        {# Note opzionali (ritardo, richieste particolari, ecc.) #}
+        <div class="auth-field">
+            <label>Note (opzionali)</label>
+            {{ form.notes }}
+            {% if form.notes.errors %}
+                <p class="field-error">
+                    {{ form.notes.errors.0 }}
+                </p>
+            {% endif %}
+        </div>
+
+        {# Pulsante principale di invio del form #}
+        <button type="submit" class="auth-button">Conferma prenotazione</button>
+    </form>
+{% endblock %}

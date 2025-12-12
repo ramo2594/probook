@@ -1,0 +1,19 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    {# Titolo della pagina: di default "ProBook", sovrascrivibile nei template figli #}
+    <title>{% block title %}ProBook{% endblock %}</title>
+
+    {# CSS principale dell'app, condiviso da tutte le pagine #}
+    <link rel="stylesheet" href="{% static 'core/style.css' %}">
+</head>
+<body class="{% block body_class %}{% endblock %}">
+    {# Contenitore principale: può diventare card centrale o layout full‑width a seconda della pagina #}
+    <div class="{% block container_class %}{% endblock %}">
+        {# Contenuto specifico della pagina (login, home, dashboard, ecc.) #}
+        {% block content %}{% endblock %}
+    </div>
+</body>
+</html>

@@ -1,0 +1,32 @@
+{% extends "base.html" %}
+
+{# Home pubblica dell'app ProBook #}
+{% block title %}ProBook{% endblock %}
+{% block body_class %}auth-body{% endblock %}
+{% block container_class %}auth-card{% endblock %}
+
+{% block content %}
+    {# Titolo principale della landing #}
+    <h1 class="auth-title">Benvenuto su ProBook</h1>
+
+    {# Sottotitolo generico: se esiste un Professional mostra il nome, altrimenti frase di default #}
+    <p class="auth-subtitle">
+        Piattaforma di prenotazione online per
+        {{ professional.business_name|default:"il tuo salone o studio" }}.
+    </p>
+
+    {# Azioni principali per l'utente: prenota o accedi come professionista #}
+    <div class="home-links">
+        {% if professional %}
+            {# Link diretto alla pagina di prenotazione pubblica per il salone/studio corrente #}
+            <a href="{% url 'public_booking' professional_id=professional.id %}" class="primary-link">
+                Prenota da {{ professional.business_name }}
+            </a>
+        {% endif %}
+
+        {# Accesso alla dashboard per il professionista (usa il login di Django) #}
+        <a href="{% url 'login' %}" class="secondary-link">
+            Login professionista
+        </a>
+    </div>
+{% endblock %}

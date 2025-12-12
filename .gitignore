@@ -1,0 +1,17 @@
+# Ambiente virtuale
+.venv/
+venv/
+
+# Database di sviluppo
+db.sqlite3
+
+# File Python compilati / cache
+__pycache__/
+*.pyc
+
+# Config locali / env
+.env
+*.env
+
+# Altro
+.DS_Store

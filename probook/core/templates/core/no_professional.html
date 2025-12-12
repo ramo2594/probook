@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+
+{# Pagina mostrata quando un utente loggato non ha ancora un profilo Professional associato #}
+{% block title %}Nessun profilo professionista{% endblock %}
+{% block body_class %}auth-body{% endblock %}
+{% block container_class %}auth-card{% endblock %}
+
+{% block content %}
+    <h1 class="auth-title">Nessun profilo collegato</h1>
+
+    {# Spiega chiaramente il problema all'utente/admin #}
+    <p class="auth-subtitle">
+        Sei loggato come {{ request.user.username }}, ma non hai ancora un profilo professionista collegato.
+    </p>
+
+    {# Istruzioni pratiche per risolvere: creare il Professional da admin o tramite chi gestisce il sistema #}
+    <p>Crealo dal pannello admin oppure chiedi all'amministratore.</p>
+{% endblock %}

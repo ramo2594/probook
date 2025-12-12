@@ -1,0 +1,271 @@
+/* ===== RESET BASE ===== */
+/* Reset minimale: rimuove margini/padding di default e usa border-box per un layout prevedibile */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* Stile generale del body per le pagine "dashboard" e layout full-width */
+body {
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    background-color: #f5f7fb;
+    color: #111827;
+    padding: 32px;  /* padding attorno al contenuto principale nelle pagine non-auth */
+}
+
+/* ===== HEADER ===== */
+/* Header di sezione usato in dashboard e storico */
+.dashboard-header {
+    margin-bottom: 24px;
+}
+
+.dashboard-header h1 {
+    font-size: 28px;
+    font-weight: 700;
+    margin-bottom: 4px;
+}
+
+.dashboard-header p {
+    color: #6b7280;
+    font-size: 14px;
+}
+
+/* ===== CARDS METRICHE ===== */
+/* Contenitore orizzontale per le card di riepilogo in dashboard */
+.metrics-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 16px;
+    margin: 24px 0;
+}
+
+/* Singola metrica (prenotazioni future, oggi, prossima, totale) */
+.metric-card {
+    background: #ffffff;
+    border-radius: 8px;
+    padding: 16px 20px;
+    min-width: 220px;
+    box-shadow: 0 4px 10px rgba(15, 23, 42, 0.08);
+}
+
+.metric-title {
+    font-size: 13px;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: #6b7280;
+    margin-bottom: 8px;
+}
+
+.metric-value {
+    font-size: 22px;
+    font-weight: 700;
+}
+
+/* ===== TABELLA PRENOTAZIONI ===== */
+/* Wrapper con sfondo bianco e shadow per tutte le tabelle (dashboard + storico) */
+.table-wrapper {
+    margin-top: 16px;
+    background: #ffffff;
+    border-radius: 8px;
+    box-shadow: 0 4px 10px rgba(15, 23, 42, 0.06);
+    overflow: hidden;
+}
+
+.styled-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 14px;
+}
+
+.styled-table thead {
+    background-color: #111827;
+    color: #ffffff;
+}
+
+.styled-table th,
+.styled-table td {
+    padding: 10px 14px;
+    text-align: left;
+}
+
+/* Riga alternata per migliorare la leggibilità */
+.styled-table tbody tr:nth-child(even) {
+    background-color: #f9fafb;
+}
+
+/* Hover leggero sulle righe della tabella */
+.styled-table tbody tr:hover {
+    background-color: #eef2ff;
+}
+
+/* ===== RESPONSIVE ===== */
+/* Su schermi piccoli riduco il padding e faccio andare le metric-card a tutta larghezza */
+@media (max-width: 768px) {
+    body {
+        padding: 16px;
+    }
+    .metric-card {
+        flex: 1 1 100%;
+    }
+}
+
+/* ===== AUTH (login / home / booking) ===== */
+/* Body per le pagine "a card centrale" (login, home, form di prenotazione, conferma, no_professional) */
+.auth-body {
+    background-color: #f5f7fb;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    padding-top: 40px;   /* Sposto leggermente la card più in alto per riempire meglio lo schermo */
+}
+
+/* Card centrale con shadow usata in tutte le pagine auth/home */
+.auth-card {
+    background: #ffffff;
+    padding: 32px 36px;
+    border-radius: 12px;
+    box-shadow: 0 12px 30px rgba(15, 23, 42, 0.18);
+    width: 100%;
+    max-width: 420px;
+}
+
+.auth-title {
+    font-size: 24px;
+    font-weight: 700;
+    margin-bottom: 4px;
+}
+
+.auth-subtitle {
+    font-size: 14px;
+    color: #6b7280;
+    margin-bottom: 20px;
+}
+
+/* Messaggio di errore per il login */
+.auth-error {
+    color: #b91c1c;
+    background: #fee2e2;
+    border-radius: 6px;
+    padding: 8px 10px;
+    font-size: 13px;
+    margin-bottom: 12px;
+}
+
+/* Layout verticale del form (login + booking) */
+.auth-form {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+}
+
+.auth-field label {
+    display: block;
+    font-size: 13px;
+    margin-bottom: 4px;
+    color: #374151;
+}
+
+/* Input di base per form auth/booking */
+.auth-field input {
+    width: 100%;
+    padding: 8px 10px;
+    border-radius: 6px;
+    border: 1px solid #d1d5db;
+    font-size: 14px;
+}
+
+.auth-field input:focus {
+    outline: none;
+    border-color: #4f46e5;
+    box-shadow: 0 0 0 1px #4f46e5;
+}
+
+/* Pulsante principale (login, conferma prenotazione, ecc.) */
+.auth-button {
+    margin-top: 6px;
+    padding: 10px 14px;
+    border-radius: 8px;
+    border: none;
+    background: #111827;
+    color: #ffffff;
+    font-size: 15px;
+    font-weight: 600;
+    cursor: pointer;
+    width: 100%;
+}
+
+.auth-button:hover {
+    background: #020617;
+}
+
+/* ===== LOGOUT ===== */
+.logout-form {
+    margin-top: 24px;
+}
+
+/* Bottone rosso per il logout nella dashboard/storico */
+.logout-button {
+    padding: 8px 16px;
+    border-radius: 999px;
+    border: none;
+    background: #b91c1c;
+    color: #ffffff;
+    font-size: 14px;
+    font-weight: 500;
+    cursor: pointer;
+}
+
+.logout-button:hover {
+    background: #991b1b;
+}
+
+/* ===== LINK AZIONE (CTA) ===== */
+/* Stili condivisi per link-bottone primario/secondario (home, storico, ecc.) */
+.primary-link,
+.secondary-link {
+    display: inline-block;
+    text-align: center;
+    padding: 10px 14px;
+    border-radius: 8px;
+    font-size: 15px;
+    font-weight: 500;
+    text-decoration: none;
+}
+
+/* Primary: call-to-action principale (es. "Prenota da ...") */
+.primary-link {
+    background: #111827;
+    color: #ffffff;
+}
+
+.primary-link:hover {
+    background: #020617;
+}
+
+/* Secondary: azioni di supporto (login, torna alla dashboard, ecc.) */
+.secondary-link {
+    background: #e5e7eb;
+    color: #111827;
+}
+
+.secondary-link:hover {
+    background: #d1d5db;
+}
+
+/* Messaggi di errore sotto i singoli campi form (booking) */
+.field-error {
+    color: #b91c1c;
+    font-size: 13px;
+    margin-top: 4px;
+}
+
+/* Contenitore dei link in home (stack verticale con spaziatura) */
+.home-links {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-top: 10px;
+}

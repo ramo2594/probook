@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+
+{# Pagina mostrata dopo l'invio corretto del form di prenotazione #}
+{% block title %}Prenotazione confermata{% endblock %}
+{% block body_class %}auth-body{% endblock %}
+{% block container_class %}auth-card{% endblock %}
+
+{% block content %}
+    <h1 class="auth-title">Prenotazione confermata</h1>
+
+    {# Messaggio riassuntivo con luogo, data e ora dell'appuntamento #}
+    <p class="auth-subtitle">
+        Hai prenotato da {{ booking.professional.business_name }} per il
+        {{ booking.date }} alle {{ booking.time }}.
+    </p>
+
+    {# Dettaglio servizio prenotato #}
+    <p><strong>Servizio:</strong> {{ booking.service }}</p>
+
+    {# Dettaglio cliente (nome + email) utile anche a chi guarda lo screenshot #}
+    <p><strong>Cliente:</strong> {{ booking.client_name }} ({{ booking.client_email }})</p>
+{% endblock %}

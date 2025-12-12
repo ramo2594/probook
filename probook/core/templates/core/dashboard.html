@@ -1,0 +1,85 @@
+{% extends "base.html" %}
+
+{# Dashboard principale del professionista: panoramica e prenotazioni future #}
+{% block title %}{{ professional.business_name }} - Dashboard{% endblock %}
+{# Nessuna classe speciale: usa layout full‑width, non la card centrale #}
+{% block body_class %}{% endblock %}
+{% block container_class %}{% endblock %}
+
+{% block content %}
+    {# Header con nome salone/studio e descrizione servizi #}
+    <div class="dashboard-header">
+        <h1>{{ professional.business_name }}</h1>
+        <p>{{ professional.services }}</p>
+    </div>
+
+    {# Row di metriche riassuntive in alto #}
+    <div class="metrics-row">
+        <div class="metric-card">
+            <div class="metric-title">Prenotazioni future</div>
+            <div class="metric-value">{{ future_count }}</div>
+        </div>
+        <div class="metric-card">
+            <div class="metric-title">Prenotazioni di oggi</div>
+            <div class="metric-value">{{ today_count }}</div>
+        </div>
+        <div class="metric-card">
+            <div class="metric-title">Prossima prenotazione</div>
+            {% if next_booking %}
+                <div>{{ next_booking.date }} – {{ next_booking.time }}</div>
+                <div>{{ next_booking.client_name }} ({{ next_booking.service }})</div>
+            {% else %}
+                <div>Nessuna prenotazione futura</div>
+            {% endif %}
+        </div>
+        <div class="metric-card">
+            <div class="metric-title">Totale prenotazioni</div>
+            <div class="metric-value">{{ total_bookings }}</div>
+        </div>
+    </div>
+
+    {# Tabella con le prenotazioni future (in arrivo) #}
+    <h2>Prenotazioni in arrivo</h2>
+
+    <div class="table-wrapper">
+        <table class="styled-table">
+            <thead>
+                <tr>
+                    <th>Data</th>
+                    <th>Ora</th>
+                    <th>Cliente</th>
+                    <th>Servizio</th>
+                    <th>Note</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for booking in bookings %}
+                    <tr>
+                        <td>{{ booking.date }}</td>
+                        <td>{{ booking.time }}</td>
+                        <td>{{ booking.client_name }}</td>
+                        <td>{{ booking.service }}</td>
+                        <td>{{ booking.notes }}</td>
+                    </tr>
+                {% empty %}
+                    <tr>
+                        <td colspan="5">Nessuna prenotazione futura.</td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+
+    {# Link per aprire lo storico completo di tutte le prenotazioni #}
+    <p style="margin-top: 12px;">
+        <a href="{% url 'booking_history' %}" class="secondary-link">
+            Vedi storico completo prenotazioni
+        </a>
+    </p>
+
+    {# Logout sicuro via POST dalla dashboard #}
+    <form action="/accounts/logout/" method="post" class="logout-form">
+        {% csrf_token %}
+        <button type="submit" class="logout-button">Logout</button>
+    </form>
+{% endblock %}
