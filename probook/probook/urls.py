@@ -16,22 +16,27 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
+
 from core import views as core_views
-from core.views import ProfessionalLoginView, booking_history  
+from core.views import ProfessionalLoginView, booking_history
+
 
 urlpatterns = [
+    # Admin Django
     path('admin/', admin.site.urls),
 
+    # Dashboard professionista
     path('dashboard/me/', core_views.my_dashboard, name='my_dashboard'),
     path('dashboard/<int:professional_id>/', core_views.professional_dashboard, name='professional_dashboard'),
-
     path('dashboard/history/', booking_history, name='booking_history'),
 
+    # Prenotazioni pubbliche
     path('book/<int:professional_id>/', core_views.public_booking, name='public_booking'),
     path('booking/success/<int:booking_id>/', core_views.booking_success, name='booking_success'),
 
+    # Auth built‑in (login/logout/password reset ecc.)
     path('accounts/', include('django.contrib.auth.urls')),
-    path('', core_views.home, name='home'),
-    
-]
 
+    # Home pubblica
+    path('', core_views.home, name='home'),
+]

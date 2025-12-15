@@ -25,6 +25,15 @@ ProBook è una web app sviluppata con Django che permette ai clienti di fissare 
 - **Frontend:** Django templates, HTML5, CSS custom (layout tipo SaaS)
 - **Email:** `send_mail` con backend console (facile da passare a SMTP reale)
 
+## Architettura interna
+
+- Views leggere: gestiscono solo HTTP (request/response, redirect, scelta template).
+- Service layer in `core/services/`:
+  - `professional_service.py`: logica della dashboard (query e conteggi: future, oggi, prossima, totale).
+  - `history_service.py`: logica dello storico prenotazioni (ordinamento dalla più recente alla più vecchia).
+  - `booking_service.py`: creazione prenotazione collegata al Professional + invio email a professionista e cliente.
+- Questo separa la logica di business dalla presentazione e rende il codice più testabile e manutenibile.
+
 ## Struttura del progetto
 
 Cartella root del progetto (questa repo):
@@ -36,6 +45,7 @@ Cartella root del progetto (questa repo):
     - `models.py` – `User`, `Professional`, `Booking`
     - `views.py` – home, dashboard, storico, form pubblico, conferma
     - `forms.py` – `BookingForm` con validazione data non passata
+    - `services/` – service layer per dashboard, storico e booking
     - `admin.py` – registrazione modelli in admin
     - `templates/` – template HTML (dashboard, home, booking, storico, ecc.)
     - `static/core/style.css` – stile globale per dashboard, card e form.
@@ -51,11 +61,11 @@ Di seguito i passi per avviare il progetto partendo dalla root della repo (`PROB
 ### 1. Clonare la repository
 
 ```bash
-git clone https://github.com/<tuo-username>/probook.git
+git clone https://github.com/ramo2594/probook.git
 cd probook
 ```
 
-*(sostituisci `<tuo-username>` con il tuo username GitHub e assicurati che il nome della repo sia coerente con quello reale)*
+*(usa il tuo fork se il progetto è stato copiato in un altro account GitHub)*
 
 ### 2. Creare e attivare l’ambiente virtuale
 
